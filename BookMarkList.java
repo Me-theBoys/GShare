@@ -3,20 +3,20 @@
  * 
  */
 public class BookMarkList{
-  private ArrayList<Profile> bookMarkList;
+  private ArrayList<User> bookMarkList;
   public BookMarkList(){
-    bookMarkList = new ArrayList<Profile>();
+    bookMarkList = new ArrayList<User>();
   }
-  public void addBookMarkList(Profile profile){
-    this.bookMarkList.add(profile);
+  public void addBookMarkList(User user){
+    this.bookMarkList.add(user);
   }
-  public void deleteBookMarkList(Profile profile){
-    this.bookMarkList.remove(bookMarkList.lastIndexOf(profile));
+  public void deleteBookMarkList(User user){
+    this.bookMarkList.remove(bookMarkList.lastIndexOf(user));
   }
-  public ArrayList<Profile> getBookMarkList(){
+  public ArrayList<User> getBookMarkList(){
     return bookMarkList;
   }
-  public Profile getBookMark(int index){
+  public User getBookMark(int index){
     return bookMarkList.get(index);
   }
 }
