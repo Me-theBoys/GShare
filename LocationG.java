@@ -45,7 +45,7 @@ public class LocationG {
     }
     /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
     /*::  This function converts radians to decimal degrees             :*/
-    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::*///ok buddy
     private double rad2deg(double rad) {
         return (rad * 180.0 / Math.PI);
     }
