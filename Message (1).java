@@ -9,7 +9,7 @@ public class Message {
   
   private String msg;
   private Calendar calendar;
-  
+  private String time;
   
   /**
    * The constructor of the message class.
@@ -19,9 +19,13 @@ public class Message {
   public Message( String msg ) {
     this.msg = msg;
     calendar = Calendar.getInstance();
+    time = getTime();
   }
   
-  
+  public Message( String msg , String time ) {
+    this.msg = msg;
+    this.time = time;
+  }
   
   /**
    * Gets the message string.
@@ -46,5 +50,12 @@ public class Message {
       calendar.get( Calendar.YEAR ) + " " + calendar.get( Calendar.HOUR_OF_DAY ) + ":" + newMinute;
     return str;
   }
+  
+  
+  public String getCurrentTime() {
+    return time;
+  }
+  
+  
   
 }
