@@ -10,6 +10,7 @@ public class Message {
   private String msg;
   private Calendar calendar;
   
+  
   /**
    * The constructor of the message class.
    * 
@@ -19,6 +20,8 @@ public class Message {
     this.msg = msg;
     calendar = Calendar.getInstance();
   }
+  
+  
   
   /**
    * Gets the message string.
@@ -32,7 +35,7 @@ public class Message {
   /**
    * Gets the current time which shows the full date hour and minute.
    * 
-   * @return str the Time str
+   * @return str the Time string.
    */
   public String getTime() {
     String newMinute = calendar.get( Calendar.MINUTE ) + "";
