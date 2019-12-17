@@ -207,7 +207,7 @@ public class Notice {
          */
     public void agreeOnLendNotice( User noticeTaker ){
         this.noticeTaker = noticeTaker;
-        if( noticeTaker.getG() >= g + noticeOwner.getActiveDeals() ){
+        if( noticeTaker.getG() >= g + noticeOwner.getActiveDealGAmount() ){
             agreed = true;
             noticeTaker.addActiveDealGAmount( g );
             startTime = new Date();
