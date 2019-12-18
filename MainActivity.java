@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static double lat = 0;
     public static double lon = 0;
+    private static int interval = 10000;
+    private static int fastestInterval = 5000;
     int PERMISSION_ID = 44;
 
     FusedLocationProviderClient mFusedLocationClient;
@@ -61,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                                     //lonTextView.setText(location.getLongitude()+"");
                                     lat = location.getLatitude();
                                     lon = location.getLongitude();
+                                    System.out.println(lat);
+                                    System.out.println(lon);
                                 }
                             }
                         }
@@ -81,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
 
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(0);
-        mLocationRequest.setFastestInterval(0);
-        mLocationRequest.setNumUpdates(1);
+        mLocationRequest.setInterval( interval );
+        mLocationRequest.setFastestInterval( fastestInterval );
+        //mLocationRequest.setNumUpdates(1);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         mFusedLocationClient.requestLocationUpdates(
