@@ -1,3 +1,4 @@
+package Location;
 package com.example.currentlocation;
 
 public class LocationG {
@@ -16,8 +17,16 @@ public class LocationG {
         return longitude;
     }
 
-    public double distanceFrom( LocationG location ){
-        return Math.abs( distance( latitude, longitude, location.getLatitude() , location.getLongitude() ) );
+    public void setLatitude( double latitude ) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude( double longitude ) {
+        this.longitude = longitude;
+    }
+
+    public double distanceFrom(LocationG location ){
+        return Math.abs( distance( latitude, longitude, location.getLatitude() , location.getLongitude(), 'K' ) );
     }
     public boolean isInRange(){ return true; }
 
@@ -30,9 +39,9 @@ public class LocationG {
         dist = Math.acos(dist);
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
-        if (unit == "K") {
+        if (unit == 'K') {
             dist = dist * 1.609344;
-        } else if (unit == "N") {
+        } else if (unit == 'N') {
             dist = dist * 0.8684;
         }
         return (dist);
@@ -45,7 +54,7 @@ public class LocationG {
     }
     /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
     /*::  This function converts radians to decimal degrees             :*/
-    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::*///ok buddy
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
     private double rad2deg(double rad) {
         return (rad * 180.0 / Math.PI);
     }
