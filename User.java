@@ -2,6 +2,8 @@ package User;
 
 import Location.LocationG;
 import java.util.ArrayList;
+import java.util.Objects;
+import Quest.*;
 
 public class User {
     private String userName;
@@ -16,16 +18,17 @@ public class User {
     private double borrowerRating;
     private int numberOfLendRates;
     private int numberOfBorrowRates;
-    private int numberOfLendNotices;
-    private int numberOfBorrowNotices;
+    private int numberOfLends;
+    private int numberOfBorrows;
     private int activeGAmount;
     private ArrayList<Quest> questsToDisplay;
-    private BookmarkList bookmarkList;
+    private ArrayList<User> bookmarkList;
     private QuestCollection allQuests;
-    //Cursed
+    //Only for quests
     private int fiveStarLendingRates;
     private int fiveStarBorrowinRates;
-
+    private boolean firstPost; //Only for lending
+    
     public User( String name, String surname, String userName, String password, String email, int g ) {
         this.name = name;
         this.surname = surname;
@@ -35,8 +38,8 @@ public class User {
         this.location = getLocation();
         this.g = g;
         activeGAmount = 0;
+        firstPost = true;
     }
-
     public void deposit( int g ){
         this.g = this.g + g;
     }
@@ -157,28 +160,28 @@ public class User {
     public void setFiveStarBorrowinRates(int fiveStarBorrowinRates) {
         this.fiveStarBorrowinRates = fiveStarBorrowinRates;
     }
-    public int getNumberOfLendNotices() {
-        return numberOfLendNotices;
+    public int getNumberOfLends() {
+        return numberOfLends;
     }
 
-    public void setNumberOfLendNotices(int numberOfLendNotices) {
-        this.numberOfLendNotices = numberOfLendNotices;
+    public void setNumberOfLends(int numberOfLends) {
+        this.numberOfLends = numberOfLends;
     }
 
-    public int getNumberOfBorrowNotices() {
-        return numberOfBorrowNotices;
+    public int getNumberOfBorrows() {
+        return numberOfBorrows;
     }
 
-    public void setNumberOfBorrowNotices(int numberOfBorrowNotices) {
-        this.numberOfBorrowNotices = numberOfBorrowNotices;
+    public void setNumberOfBorrows(int numberOfBorrows) {
+        this.numberOfBorrows = numberOfBorrows;
     }
-    public BookmarkList getBookmarkList(){
+    public ArrayList<User> getBookmarkList(){
         return bookmarkList;
     }
     /*
     ONLY FOR DATABASE USAGE
      */
-    public void setBookmarkList( BookmarkList list ){
+    public void setBookmarkList( ArrayList<User> list ){
         bookmarkList = list;
     }
     public void setQuestsToDisplay( Quest q1, Quest q2, Quest q3, Quest q4, Quest q5 ){
@@ -197,4 +200,22 @@ public class User {
         return allQuests;
     }
 
+    public boolean isFirstTime() {
+        return firstPost;
+    }
+
+    public void setFirstTime(boolean firstPost) {
+        this.firstPost = firstPost;
+    }
+
+    /**
+     * Only for arrayList usage not really important for now
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return user.getUserName().equals( this.getUserName() );
+    }
 }
