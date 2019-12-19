@@ -1,6 +1,7 @@
 package Notice;
 
 import Location.LocationG;
+import User.User;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -8,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 /*
 This site probably gonna be usefull
 https://www.youtube.com/watch?v=XQJiiuk8Feo
-This class will create a notice and
+This class will create a notice and do aproper things
  */
 public class Notice {
     public static final int LEND_NOTICE = 1;
@@ -25,7 +26,7 @@ public class Notice {
     private boolean ratedLend;
     private String name;
     private String note;
-    private String publishDate;
+    private long postingTime;
     private String comment;
     private int g;
     private Date startTime;
@@ -55,6 +56,7 @@ public class Notice {
         over = false;
         ratedLend = false;
         ratedBorrow = false;
+        postingTime = (new Date()).getTime();
     }
     /*
     This constructor should be used when creating lend notices
@@ -79,6 +81,7 @@ public class Notice {
         agreed = false;
         ratedLend = false;
         ratedLend = false;
+        postingTime = (new Date()).getTime();
     }
 
     public int getDay() {
@@ -143,10 +146,12 @@ public class Notice {
         this.note = note;
     }
 
-    public String getPublishDate() {
-        return publishDate;
+    public long getPostingTime() {
+        return postingTime;
     }
-
+    public void setPostingTime( long time ){
+        this.postingTime = time;
+    }
     public String getComment() {
         return comment;
     }
@@ -193,6 +198,8 @@ public class Notice {
             agreed = true;
             noticeOwner.addActiveDealGAmount( g );
             startTime = new Date();
+            noticeTaker.setNumberOfLends( noticeTaker.getNumberOfLends() + 1 );
+            noticeOwner.setNumberOfBorrows( noticeOwner.getNumberOfBorrows() + 1 );
         }
         else{
             throw new IllegalArgumentException( "Notice owner does not have enough money");
@@ -211,6 +218,8 @@ public class Notice {
             agreed = true;
             noticeTaker.addActiveDealGAmount( g );
             startTime = new Date();
+            noticeTaker.setNumberOfBorrows( noticeTaker.getNumberOfBorrows() + 1 );
+            noticeOwner.setNumberOfLends( noticeOwner.getNumberOfLends() + 1 );
         }
         else{
             throw new IllegalArgumentException( "Notice owner does not have enough money");
@@ -223,6 +232,12 @@ public class Notice {
     public void finish(){
         over = true;
         doTransaction( noticeOwner , noticeTaker );
+        if( noticeType == BORROW_NOTICE ){
+            noticeOwner.addActiveDealGAmount( -g );
+        }
+        if( noticeType == LEND_NOTICE ){
+            noticeTaker.addActiveDealGAmount( -g );
+        }
     }
     /*
     Used: https://stackoverflow.com/questions/20165564/calculating-days-between-two-dates-with-java
@@ -234,7 +249,7 @@ public class Notice {
     public long computeTimeLeft(){
         Date current = new Date();
         long diff = current.getTime() - startTime.getTime();
-        return (long)day - TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        return (day - TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
     }
     /*
     For checking if the notice time is over ( did not test yet these computeTimeLeft methods definietly need testing)
@@ -291,6 +306,12 @@ public class Notice {
                 }
             }
         }
+    }
+    public User getNoticeOwner(){
+        return noticeOwner;
+    }
+    public User getNoticeTaker() {
+        return noticeTaker;
     }
 
 }
