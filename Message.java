@@ -10,6 +10,7 @@ public class Message {
   private String msg;
   private Calendar calendar;
   private String time;
+  private long millisecond;
   
   /**
    * The constructor of the message class.
@@ -19,7 +20,8 @@ public class Message {
   public Message( String msg ) {
     this.msg = msg;
     calendar = Calendar.getInstance();
-    time = getTime();
+    time = createTime();
+    millisecond = createMillisecond();
   }
   
   public Message( String msg , String time ) {
@@ -41,7 +43,7 @@ public class Message {
    * 
    * @return str the Time string.
    */
-  public String getTime() {
+  private String createTime() {
     String newMinute = calendar.get( Calendar.MINUTE ) + "";
     if(calendar.MINUTE / 10 == 0 ){
        newMinute = 0 + "" + calendar.get( Calendar.MINUTE );
@@ -52,10 +54,17 @@ public class Message {
   }
   
   
-  public String getCurrentTime() {
+  public String getTime() {
     return time;
   }
   
+  private long createMillisecond() {
+    return calendar.getTimeInMillis();
+  }
+  
+  public long getMillisecond() {
+    return millisecond;
+  }
   
   
 }
