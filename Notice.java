@@ -82,6 +82,7 @@ public class Notice {
         ratedLend = false;
         ratedLend = false;
         postingTime = (new Date()).getTime();
+        noticeOwner.setFirstPost(false);
     }
 
     public int getDay() {
@@ -182,6 +183,14 @@ public class Notice {
 
     public int getNoticeType() {
         return noticeType;
+    }
+
+    /**
+     * For database usage only do not use this
+     * @param noticeType type of the notice 
+     */
+    public void setNoticeType( int noticeType ){
+        this.noticeType = noticeType;
     }
     /*
     Please add try/catch to this and show a pop up message something like you don't have enough money so you don't have
