@@ -143,6 +143,7 @@ public class DBHelper {
     }
     private static String getMessageMsg(){}
     private static String getMessageTime(){}
+    private static long getMessageMilliseconds(){}
 
     /**
      * Look at Chat class and use constructor of other classes ( It may work maybe idk )
