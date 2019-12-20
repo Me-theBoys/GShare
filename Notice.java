@@ -29,7 +29,7 @@ public class Notice {
     private long postingTime;
     private String comment;
     private int g;
-    private Date startTime;
+    private long startTime;
     private User noticeOwner;
     private User noticeTaker;
     private LocationG location;
@@ -111,6 +111,10 @@ public class Notice {
             ratedLend = true;
         }
     }
+    public void setForDatabaseRateLend( int rateLend ){
+        this.rateLend = rateLend;
+    }
+
 
     public int getRateBorrow(){
         return rateBorrow;
@@ -121,6 +125,9 @@ public class Notice {
             this.rateBorrow = rateBorrow;
             ratedBorrow = true;
         }
+    }
+    public void setForDatabaseRateBorrow( int rateBorrow ){
+        this.rateBorrow = rateBorrow;
     }
 
     public boolean isAgreed() {
@@ -177,6 +184,10 @@ public class Notice {
         }
     }
 
+    public void setForDatabaseG( int g ){
+        this.g = g;
+    }
+
     public LocationG getLocation() {
         return location;
     }
@@ -187,12 +198,12 @@ public class Notice {
 
     /**
      * For database usage only do not use this
-     * @param noticeType type of the notice 
+     * @param noticeType type of the notice
      */
     public void setNoticeType( int noticeType ){
         this.noticeType = noticeType;
     }
-    /*
+    /**
     Please add try/catch to this and show a pop up message something like you don't have enough money so you don't have
     negative money
     Only use for borrow notices and use when users agree on the notice
@@ -206,7 +217,7 @@ public class Notice {
             this.g = g;
             agreed = true;
             noticeOwner.addActiveDealGAmount( g );
-            startTime = new Date();
+            startTime = new Date().getTime();
             noticeTaker.setNumberOfLends( noticeTaker.getNumberOfLends() + 1 );
             noticeOwner.setNumberOfBorrows( noticeOwner.getNumberOfBorrows() + 1 );
         }
@@ -226,7 +237,7 @@ public class Notice {
         if( noticeTaker.getG() >= g + noticeOwner.getActiveDealGAmount() ){
             agreed = true;
             noticeTaker.addActiveDealGAmount( g );
-            startTime = new Date();
+            startTime = new Date().getTime();
             noticeTaker.setNumberOfBorrows( noticeTaker.getNumberOfBorrows() + 1 );
             noticeOwner.setNumberOfLends( noticeOwner.getNumberOfLends() + 1 );
         }
@@ -257,7 +268,7 @@ public class Notice {
      */
     public long computeTimeLeft(){
         Date current = new Date();
-        long diff = current.getTime() - startTime.getTime();
+        long diff = current.getTime() - startTime;
         return (day - TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
     }
     /*
@@ -265,7 +276,7 @@ public class Notice {
     @return diffInMillies time left in milli seconds
      */
     public long computeTimeLeftForMilliSeconds(){
-        long finishTime = startTime.getTime() + TimeUnit.MILLISECONDS.convert(day, TimeUnit.DAYS);
+        long finishTime = startTime + TimeUnit.MILLISECONDS.convert(day, TimeUnit.DAYS);
         long diffInMillies = finishTime - ( new Date() ).getTime();
         return diffInMillies;
     }
@@ -323,4 +334,30 @@ public class Notice {
         return noticeTaker;
     }
 
+    /**
+     * For database usage only
+     * @param startTime
+     */
+    public void setStartTime( long startTime ){
+        this.startTime = startTime;
+    }
+    public long getStartTime(){
+        return startTime;
+    }
+
+    /**
+     * For database usage only
+     * @param agreed
+     */
+    public void setAgreed(boolean agreed) {
+        this.agreed = agreed;
+    }
+
+    /**
+     * For database usage only
+     * @param over
+     */
+    public void setOver(boolean over) {
+        this.over = over;
+    }
 }
