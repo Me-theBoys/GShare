@@ -1,5 +1,7 @@
 package Chat;
 
+import User.User;
+
 import java.util.Calendar;
 
 /**
@@ -13,17 +15,21 @@ public class Message {
     private Calendar calendar;
     private String time;
     private long millisecond;
+    private User reciever;
+    private User sender;
 
     /**
      * The constructor of the message class.
      *
      * @param msg the string message
      */
-    public Message( String msg ) {
+    public Message( String msg, User reciever, User sender ) {
         this.msg = msg;
         calendar = Calendar.getInstance();
         time = getTime();
         millisecond = createMillisecond();
+        this.reciever = reciever;
+        this.sender = sender;
     }
 
     /**
@@ -31,10 +37,12 @@ public class Message {
      * @param msg
      * @param time
      */
-    public Message( String msg , String time, long msecond ) {
+    public Message( String msg , String time, long msecond , User reciever , User sender ) {
         this.msg = msg;
         this.time = time;
         this.millisecond = msecond;
+        this.reciever = reciever;
+        this.sender = sender;
     }
 
     /**
@@ -66,6 +74,12 @@ public class Message {
         return time;
     }
 
+    /**
+     *
+     * @param msg
+     * @return -1 if this object's message created earlier
+     * @return 1 if this object's message created later
+     */
     public int compareTo( Message msg ){
         if( this.getMillisecond() < msg.getMillisecond() ){
             return -1;
@@ -75,12 +89,18 @@ public class Message {
         }
         return 0;
     }
-    
+
    private long createMillisecond() {
        return calendar.getTimeInMillis();
    }
-    public long getMillisecond() {
+   public long getMillisecond() {
         return millisecond;
+    }
+    public User getReciever(){
+        return reciever;
+    }
+    public User getSender(){
+        return sender;
     }
 
 
