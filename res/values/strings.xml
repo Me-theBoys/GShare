@@ -18,4 +18,13 @@
     <string name="registerEmail">E-mail</string>
     <string name="nameSurname">Name and Surname (Will be displayed to other users):</string>
     <string name="RegisterNameSurname">Name and Surname</string>
+    <string name="addnotice">Add Notice</string>
+    <string name="publishbutton">Publish</string>
+    <string name="item_name">Item Name</string>
+    <string name="days">Days</string>
+    <string name="categorytext">Category:</string>
+    <string name="item_nametext">Item Name:</string>
+    <string name="daystext">Days:</string>
+    <string name="note">Note</string>
+    <string name="notetext">Note:</string>
 </resources>
