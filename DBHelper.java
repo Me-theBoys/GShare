@@ -107,7 +107,8 @@ public class DBHelper {
     private static String getNoticeName(){}
     private static String getNoticeNote(){}
     private static long getNoticePostingTime(){}
-    private static String getNoticeComment(){}
+    private static String getNoticeLendComment(){}
+    private static String getNoticeRateComment(){}
     private static int getNoticeG(){}
     private static long getNoticeStartTime(){}
     //You will also insert users into notice since it is a variable of notice you may want to check variables of Notice class
