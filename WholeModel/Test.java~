@@ -1,0 +1,19 @@
+import java.util.Calendar;
+import Chat.*;
+import User.*;
+import Sort.*;
+import Notice.*;
+import Quest.*;
+import Location.*;
+public class Test {
+    public static void main( String [] Args){
+        System.out.println("hello");
+        Calendar c = Calendar.getInstance();
+        System.out.println();
+        //User a = new User( "Bora", "Cun", "brcn24", "afafa", "ejderado99@gmail.com);
+        System.out.println(c.get( Calendar.MILLISECOND ) );
+    }
+    public static int a(){
+        return 2;
+    }
+}
