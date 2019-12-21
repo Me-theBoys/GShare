@@ -6,6 +6,10 @@ import User.User;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Where i left quest system should be fixed
+ */
+
 /*
 This site probably gonna be usefull
 https://www.youtube.com/watch?v=XQJiiuk8Feo
@@ -27,7 +31,8 @@ public class Notice {
     private String name;
     private String note;
     private long postingTime;
-    private String comment;
+    private String commentBorrowing;
+    private String commentLending;
     private int g;
     private long startTime;
     private User noticeOwner;
@@ -160,13 +165,21 @@ public class Notice {
     public void setPostingTime( long time ){
         this.postingTime = time;
     }
-    public String getComment() {
-        return comment;
+    public String getCommentBorrowing() {
+        return commentBorrowing;
+    }
+    public String getCommentLending() {
+        return commentLending;
     }
 
-    public void setComment(String comment) {
+    public void setCommentBorrowing(String comment) {
         if( isOver() ) {
-            this.comment = comment;
+            this.commentBorrowing = comment;
+        }
+    }
+    public void setCommentLending( String comment ) {
+        if( isOver() ) {
+            this.commentLending = comment;
         }
     }
 
@@ -290,7 +303,7 @@ public class Notice {
     @param noticeTaker who agreed to take the notice
      */
     public void doTransaction( User noticeOwner, User noticeTaker){
-        double gToTransact = ( g / ( day * 1.0 ) ) * ( day - computeTimeLeft() );
+        double gToTransact = ( g / ( day * 1.0 ) ) * ( day - day/2 );//DO NOT FORGET
 
         if( noticeType == BORROW_NOTICE ) {
            noticeOwner.withdraw( (int)gToTransact );
